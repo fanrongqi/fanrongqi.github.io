@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>范荣琦 Fan Rongqi — 雕塑艺术 Sculpture</title>
+<meta name="description" content="范荣琦，雕塑艺术家。透过作品，唤醒生命本有的力量。叮咚锵文化雕塑工作室。">
+<meta property="og:title" content="范荣琦 Fan Rongqi — Sculpture Artist">
+<meta property="og:description" content="Awakening the inherent power of life through sculpture.">
+<style>
+:root {
+  --bg: #1a1310;
+  --bg2: #221a14;
+  --bg3: #2d221a;
+  --card: #2a1f17;
+  --gold: #c9a227;
+  --gold2: #e8c060;
+  --gold-dim: rgba(201,162,39,0.15);
+  --text: #f0e8d8;
+  --text2: #c0aa88;
+  --text3: #7a6a55;
+  --red: #b22222;
+  --white: #fff;
+  --border: rgba(201,162,39,0.2);
+  --shadow: 0 8px 32px rgba(0,0,0,0.5);
+  --radius: 8px;
+  --transition: 0.3s ease;
+  --tag-available: #c9a227;
+  --tag-custom: #6b9f7e;
+  --tag-exhibition: #6b8bbf;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ---- Loader ---- */
+#loader {
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; flex-direction: column; gap: 16px;
+  transition: opacity 0.6s ease;
+}
+#loader.hidden { opacity: 0; pointer-events: none; }
+.loader-ring {
+  width: 48px; height: 48px; border: 3px solid var(--border);
+  border-top-color: var(--gold); border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; }
+
+/* ---- Navbar ---- */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,19,16,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 64px;
+  transition: all var(--transition);
+}
+.nav-brand { display: flex; flex-direction: column; }
+.nav-brand-zh { font-size: 1.05rem; color: var(--gold); letter-spacing: 2px; font-weight: 600; }
+.nav-brand-en { font-size: 0.65rem; color: var(--text3); letter-spacing: 3px; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text2); text-decoration: none; font-size: 0.82rem;
+  letter-spacing: 1px; transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--gold); }
+.lang-toggle {
+  background: var(--gold-dim); border: 1px solid var(--border);
+  color: var(--gold); padding: 5px 14px; border-radius: 20px;
+  cursor: pointer; font-size: 0.8rem; letter-spacing: 1px;
+  transition: all var(--transition);
+}
+.lang-toggle:hover { background: var(--gold); color: var(--bg); }
+.hamburger {
+  display: none; background: none; border: none;
+  color: var(--gold); cursor: pointer; font-size: 1.4rem;
+}
+.mobile-menu {
+  display: none; position: fixed; inset: 64px 0 0 0;
+  background: var(--bg); z-index: 99; flex-direction: column;
+  padding: 32px; gap: 24px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--text); font-size: 1.1rem; text-decoration: none;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+}
+
+/* ---- Hero ---- */
+#hero {
+  height: 100vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0d0a08 0%, #1a1310 40%, #2a1f17 100%);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(10,7,5,0.7) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2; max-width: 700px; padding: 0 24px;
+  animation: fadeUp 1.2s ease forwards; opacity: 0; transform: translateY(30px);
+}
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.hero-sub { color: var(--gold); font-size: 0.78rem; letter-spacing: 4px; margin-bottom: 18px; }
+.hero-name-zh { font-size: clamp(3rem, 8vw, 5.5rem); color: var(--white); letter-spacing: 0.15em; font-weight: 300; line-height: 1.1; margin-bottom: 8px; }
+.hero-name-en { font-size: clamp(1rem, 3vw, 1.5rem); color: var(--text3); letter-spacing: 6px; font-weight: 300; margin-bottom: 32px; }
+.hero-tagline { font-size: clamp(0.85rem, 2vw, 1rem); color: var(--text2); letter-spacing: 2px; margin-bottom: 40px; line-height: 2; }
+.hero-cta { display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  background: var(--gold); color: var(--bg); padding: 12px 32px;
+  text-decoration: none; border-radius: 30px; font-size: 0.85rem;
+  letter-spacing: 2px; transition: all var(--transition); font-weight: 600;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+.btn-outline {
+  border: 1px solid var(--gold); color: var(--gold); padding: 12px 32px;
+  text-decoration: none; border-radius: 30px; font-size: 0.85rem;
+  letter-spacing: 2px; transition: all var(--transition);
+}
+.btn-outline:hover { background: var(--gold-dim); transform: translateY(-2px); }
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text3); font-size: 0.7rem; letter-spacing: 2px; animation: bounce 2s ease infinite;
+}
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+.hero-scroll-arrow { font-size: 1.2rem; }
+
+/* ---- Section Commons ---- */
+section { padding: 80px 24px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-tag { color: var(--gold); font-size: 0.72rem; letter-spacing: 4px; margin-bottom: 12px; display: block; }
+.section-title { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--white); font-weight: 300; letter-spacing: 4px; }
+.section-title-en { font-size: 0.78rem; color: var(--text3); letter-spacing: 3px; margin-top: 6px; }
+.gold-line { width: 48px; height: 2px; background: var(--gold); margin: 16px auto 0; }
+
+/* ---- Works Section ---- */
+#works { background: var(--bg); }
+
+/* Filter bar */
+.works-filter {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  margin-bottom: 40px;
+}
+.filter-btn {
+  padding: 7px 20px; border-radius: 20px; border: 1px solid var(--border);
+  background: transparent; color: var(--text2); cursor: pointer;
+  font-size: 0.78rem; letter-spacing: 1px; transition: all var(--transition);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--gold); border-color: var(--gold); color: var(--bg);
+}
+.filter-btn.active-status-available { background: var(--tag-available); border-color: var(--tag-available); color: var(--bg); }
+.filter-btn.active-status-custom { background: var(--tag-custom); border-color: var(--tag-custom); color: var(--bg); }
+.filter-btn.active-status-exhibition { background: var(--tag-exhibition); border-color: var(--tag-exhibition); color: var(--bg); }
+
+/* Works grid */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.work-card {
+  background: var(--card); border-radius: var(--radius);
+  overflow: hidden; cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  border: 1px solid transparent;
+}
+.work-card:hover {
+  transform: translateY(-6px); box-shadow: var(--shadow);
+  border-color: var(--border);
+}
+.work-card-img {
+  width: 100%; aspect-ratio: 4/3; object-fit: contain;
+  object-position: center 55%;
+  transition: transform 0.5s ease; display: block;
+  background: var(--bg3);
+}
+.work-card:hover .work-card-img { transform: scale(1.05); }
+.work-card-body { padding: 16px; }
+.work-card-series {
+  font-size: 0.68rem; color: var(--gold); letter-spacing: 2px;
+  margin-bottom: 6px; text-transform: uppercase;
+}
+.work-card-title { font-size: 0.95rem; color: var(--white); margin-bottom: 4px; line-height: 1.4; }
+.work-card-meta { font-size: 0.75rem; color: var(--text3); margin-bottom: 8px; }
+.work-card-price { font-size: 0.82rem; color: var(--text2); }
+.work-card-badge {
+  position: absolute; top: 12px; right: 12px;
+  padding: 3px 10px; border-radius: 10px;
+  font-size: 0.65rem; letter-spacing: 1px; font-weight: 600;
+}
+.badge-available { background: rgba(201,162,39,0.9); color: #1a1310; }
+.badge-custom { background: rgba(107,159,126,0.9); color: #fff; }
+.badge-exhibition { background: rgba(107,139,191,0.9); color: #fff; }
+
+.works-empty {
+  grid-column: 1/-1; text-align: center;
+  color: var(--text3); padding: 60px; font-size: 1rem;
+}
+
+/* ---- Lightbox ---- */
+#lightbox {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.93); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+#lightbox.open { display: flex; }
+.lb-inner {
+  max-width: 1200px; width: 96%; background: var(--bg2);
+  border-radius: 12px; overflow: hidden;
+  display: flex; flex-direction: column;
+  max-height: 94vh; box-shadow: 0 0 80px rgba(0,0,0,0.7);
+  border: 1px solid var(--border);
+}
+.lb-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.lb-series { font-size: 0.72rem; color: var(--gold); letter-spacing: 2px; }
+.lb-close {
+  background: none; border: none; color: var(--text2);
+  cursor: pointer; font-size: 1.5rem; line-height: 1;
+  transition: color var(--transition);
+}
+.lb-close:hover { color: var(--gold); }
+.lb-body {
+  display: flex; flex-direction: row; overflow: hidden; flex: 1;
+  min-height: 0;
+}
+.lb-img-area {
+  flex: 1; min-width: 0; display: flex; align-items: center;
+  justify-content: center; background: var(--bg); position: relative;
+  max-height: 78vh; touch-action: pan-y; user-select: none; cursor: grab;
+}
+.lb-img {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+  display: block;
+}
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.6); border: 1px solid var(--border);
+  color: var(--gold); border-radius: 50%; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem; transition: all var(--transition);
+}
+.lb-nav:hover { background: var(--gold); color: var(--bg); }
+.lb-prev { left: 12px; }
+.lb-next { right: 12px; }
+.lb-info-panel {
+  width: 300px; flex-shrink: 0; display: flex; flex-direction: column;
+  border-left: 1px solid var(--border); overflow: hidden;
+}
+.lb-info {
+  flex: 1; min-height: 0; padding: 20px;
+  overflow-y: auto;
+}
+.lb-thumbs-wrap {
+  flex-shrink: 0; border-top: 1px solid var(--border);
+}
+.lb-thumbs-wrap .lb-thumbs {
+  padding: 8px 12px; gap: 5px; max-height: 160px; overflow-y: auto;
+}
+.lb-thumbs-wrap .lb-thumb {
+  width: 42px; height: 42px;
+}
+.lb-title { font-size: 1.05rem; color: var(--white); margin-bottom: 6px; line-height: 1.4; }
+.lb-title-en { font-size: 0.78rem; color: var(--text3); margin-bottom: 16px; }
+.lb-detail-row { margin-bottom: 8px; }
+.lb-detail-label { font-size: 0.68rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 2px; }
+.lb-detail-val { font-size: 0.82rem; color: var(--text2); }
+.lb-price {
+  margin-top: 16px; padding: 12px; background: var(--gold-dim);
+  border-radius: 6px; border-left: 3px solid var(--gold);
+}
+.lb-price-label { font-size: 0.68rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px; }
+.lb-price-val { font-size: 0.9rem; color: var(--white); font-weight: 600; }
+.lb-custom-note {
+  margin-top: 10px; padding: 10px; background: rgba(107,159,126,0.1);
+  border-radius: 6px; border-left: 3px solid var(--tag-custom);
+  font-size: 0.78rem; color: #8ec9a0;
+}
+.lb-quote {
+  margin-top: 16px; padding: 12px; border-left: 2px solid var(--gold);
+  color: var(--text2); font-size: 0.82rem; font-style: italic;
+  line-height: 1.7;
+}
+
+/* ---- Gallery Multi-image (for装置系列) ---- */
+.lb-thumbs {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px;
+  background: var(--bg3); overflow-y: auto; flex-shrink: 0;
+  border-top: 1px solid var(--border); max-height: 140px;
+}
+.lb-thumb {
+  width: 44px; height: 44px; object-fit: cover; border-radius: 4px;
+  cursor: pointer; opacity: 0.6; transition: all var(--transition);
+  flex-shrink: 0; border: 2px solid transparent;
+}
+.lb-thumb:hover, .lb-thumb.active { opacity: 1; border-color: var(--gold); }
+.lb-images { position: relative; flex: 1; overflow: hidden; }
+.lb-main-img { display: none; width: 100%; height: 100%; max-height: 76vh; object-fit: contain; border-radius: var(--radius); }
+.lb-main-img.active { display: block; }
+/* 滑动提示 — 仅在移动端且有多张图时显示 */
+.lb-swipe-hint {
+  display: none; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.55); color: var(--text2); font-size: 0.72rem;
+  padding: 4px 12px; border-radius: 20px; pointer-events: none; white-space: nowrap;
+  letter-spacing: 1px; animation: hintFadeOut 3s ease forwards;
+}
+@keyframes hintFadeOut { 0%,60%{opacity:1} 100%{opacity:0} }
+.lb-swipe-hint.active { display: block; }
+@media (max-width: 768px) {
+  .lb-img-area { max-height: 50vh; }
+}
+
+
+/* ---- Philosophy / About ---- */
+#about { background: var(--bg2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.about-photo { border-radius: var(--radius); overflow: hidden; }
+.about-photo img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; }
+.about-text h3 { font-size: 1.4rem; color: var(--gold); font-weight: 400; margin-bottom: 16px; }
+.about-text p { color: var(--text2); font-size: 0.9rem; line-height: 1.9; margin-bottom: 20px; }
+.philosophy-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.phil-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px; background: var(--card); border-radius: var(--radius);
+  border-left: 3px solid var(--gold);
+}
+.phil-num { color: var(--gold); font-size: 1.4rem; font-weight: 200; flex-shrink: 0; }
+.phil-content h4 { font-size: 0.88rem; color: var(--white); margin-bottom: 4px; }
+.phil-content p { font-size: 0.8rem; color: var(--text3); line-height: 1.6; }
+
+/* ---- Method ---- */
+#method { background: var(--bg); }
+.method-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.method-card {
+  background: var(--card); padding: 32px 24px;
+  border-radius: var(--radius); text-align: center;
+  border-top: 3px solid var(--gold); transition: transform var(--transition);
+}
+.method-card:hover { transform: translateY(-4px); }
+.method-icon { font-size: 2rem; margin-bottom: 12px; }
+.method-title { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 8px; }
+.method-sub { color: var(--text3); font-size: 0.75rem; margin-bottom: 12px; }
+.method-desc { color: var(--text2); font-size: 0.82rem; line-height: 1.7; }
+.method-spirit {
+  text-align: center; margin-top: 32px; padding: 24px;
+  background: var(--card); border-radius: var(--radius);
+  border: 1px solid var(--border);
+  color: var(--gold); font-size: 0.88rem; letter-spacing: 2px;
+}
+
+/* ---- Chronology ---- */
+#chronology { background: var(--bg2); }
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+.timeline::before {
+  content: ""; position: absolute; left: 120px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.timeline-item { display: flex; gap: 32px; margin-bottom: 32px; align-items: flex-start; }
+.timeline-year {
+  min-width: 88px; text-align: right;
+  color: var(--gold); font-size: 0.85rem; font-weight: 600;
+  padding-top: 2px; flex-shrink: 0;
+}
+.timeline-dot {
+  width: 10px; height: 10px; background: var(--gold);
+  border-radius: 50%; flex-shrink: 0;
+  margin-top: 6px; position: relative; left: -5px;
+}
+.timeline-content { flex: 1; }
+.timeline-series { color: var(--white); font-size: 0.95rem; margin-bottom: 4px; }
+.timeline-desc { color: var(--text3); font-size: 0.8rem; }
+
+/* ---- Social Meaning ---- */
+#meaning { background: var(--bg); }
+.meaning-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.meaning-card {
+  text-align: center; padding: 40px 24px;
+  background: var(--card); border-radius: var(--radius);
+  border: 1px solid var(--border); transition: all var(--transition);
+}
+.meaning-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.meaning-icon { font-size: 2.4rem; margin-bottom: 16px; }
+.meaning-title { color: var(--gold); font-size: 0.88rem; letter-spacing: 3px; margin-bottom: 12px; }
+.meaning-desc { color: var(--text2); font-size: 0.82rem; line-height: 1.8; }
+
+/* ---- Awards ---- */
+#awards { background: var(--bg2); }
+.awards-list { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.award-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px 20px; background: var(--card);
+  border-radius: var(--radius); border-left: 3px solid var(--gold);
+}
+.award-icon { color: var(--gold); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.award-text { color: var(--text2); font-size: 0.85rem; line-height: 1.6; }
+.award-text strong { color: var(--white); }
+
+/* ---- Contact ---- */
+#contact { background: var(--bg); }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; max-width: 900px; margin: 0 auto; }
+.contact-info h3 { color: var(--gold); font-size: 1.1rem; margin-bottom: 24px; letter-spacing: 2px; }
+.contact-row {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-label { font-size: 0.72rem; color: var(--gold); letter-spacing: 1px; min-width: 60px; flex-shrink: 0; margin-top: 2px; }
+.contact-val { font-size: 0.85rem; color: var(--text2); }
+.contact-tagline {
+  padding: 32px; background: var(--card); border-radius: var(--radius);
+  text-align: center; border-top: 3px solid var(--gold);
+}
+.contact-tagline-zh { font-size: 1.2rem; color: var(--white); margin-bottom: 8px; letter-spacing: 2px; }
+.contact-tagline-en { font-size: 0.78rem; color: var(--text3); letter-spacing: 2px; line-height: 1.8; }
+
+/* ---- Footer ---- */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 24px 32px; text-align: center;
+  color: var(--text3); font-size: 0.75rem; letter-spacing: 1px;
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+/* ---- Scroll Reveal ---- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .about-grid { grid-template-columns: 1fr; }
+  .method-cards, .meaning-cards { grid-template-columns: 1fr; }
+  .lb-body { flex-direction: column; }
+  .lb-info-panel { width: 100%; border-left: none; border-top: 1px solid var(--border); max-height: 320px; }
+  .lb-info { max-height: 180px; }
+  .timeline::before { left: 60px; }
+  .timeline-year { min-width: 50px; font-size: 0.75rem; }
+  .contact-inner { grid-template-columns: 1fr; }
+  #navbar { padding: 0 16px; }
+  section { padding: 56px 16px; }
+  .works-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text" id="loaderText">唤醒中 · AWAKENING</div>
+</div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-brand" style="text-decoration:none">
+    <span class="nav-brand-zh">范荣琦</span>
+    <span class="nav-brand-en">FAN RONGQI</span>
+  </a>
+  <div class="nav-links">
+    <a href="#about" data-zh="关于" data-en="About">关于</a>
+    <a href="#works" data-zh="作品" data-en="Works">作品</a>
+    <a href="#method" data-zh="方法论" data-en="Method">方法论</a>
+    <a href="#chronology" data-zh="年表" data-en="Timeline">年表</a>
+    <a href="#meaning" data-zh="社会意义" data-en="Meaning">社会意义</a>
+    <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
+    <a href="#terms" data-zh="收藏须知" data-en="Terms">收藏须知</a>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <button class="lang-toggle" onclick="toggleLang()">EN</button>
+    <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()" data-zh="关于" data-en="About">关于</a>
+  <a href="#works" onclick="toggleMenu()" data-zh="作品" data-en="Works">作品</a>
+  <a href="#method" onclick="toggleMenu()" data-zh="方法论" data-en="Method">方法论</a>
+  <a href="#chronology" onclick="toggleMenu()" data-zh="年表" data-en="Timeline">年表</a>
+  <a href="#meaning" onclick="toggleMenu()" data-zh="社会意义" data-en="Meaning">社会意义</a>
+  <a href="#contact" onclick="toggleMenu()" data-zh="联系" data-en="Contact">联系</a>
+  <a href="#terms" onclick="toggleMenu()" data-zh="收藏须知" data-en="Terms">收藏须知</a>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-sub">雕塑艺术家 · SCULPTURE ARTIST</div>
+    <div class="hero-name-zh">范荣琦</div>
+    <div class="hero-name-en">FAN RONGQI</div>
+    <div class="hero-tagline">
+      <span data-zh="透过作品，唤醒生命本有的力量" data-en="Awakening the inherent power of life through sculpture">透过作品，唤醒生命本有的力量</span>
+      <br>
+      <span class="lang-en" style="display:none;font-size:0.85em;color:var(--text3)">叮咚锵文化雕塑工作室 · Ding Dong Qiang Cultural Sculpture Studio</span>
+      <span class="lang-zh" style="font-size:0.85em;color:var(--text3)">叮咚锵文化雕塑工作室</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#about" class="btn-primary" data-zh="了解艺术家" data-en="About Artist">了解艺术家</a>
+      <a href="#works" class="btn-outline" data-zh="浏览作品" data-en="View Works">浏览作品</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-arrow">↓</div>
+    <span data-zh="向下探索" data-en="Scroll to explore">向下探索</span>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">ABOUT</span>
+      <h2 class="section-title" data-zh="艺术家" data-en="Artist">艺术家</h2>
+      <div class="section-title-en" data-zh="范荣琦 · 叮咚锵文化雕塑工作室" data-en="Fan Rongqi · Ding Dong Qiang Studio">范荣琦 · 叮咚锵文化雕塑工作室</div>
+      <div class="gold-line"></div>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-photo">
+        <img src="images/new_s4_i0.jpg" alt="范荣琦" loading="lazy">
+      </div>
+      <div class="about-text">
+        <h3 data-zh="艺术哲学" data-en="Artistic Philosophy">艺术哲学</h3>
+        <p data-zh="范荣琦，1984年生于福建漳平，叮咚锵文化雕塑工作室主理人。2008年毕业于福建师范大学美术学院雕塑专业。2021年从十余年销售行业回归雕塑创作，以一种使命感重拾初心。" data-en="Fan Rongqi, born 1984 in Fujian Zhangping. Director of Ding Dong Qiang Cultural Sculpture Studio. Graduated from the Sculpture Department, College of Fine Arts, Fujian Normal University in 2008. After more than a decade in sales, he returned to sculpture in 2021 with a sense of mission.">
+          范荣琦，1984年生于福建漳平，叮咚锵文化雕塑工作室主理人。2008年毕业于福建师范大学美术学院雕塑专业。2021年从十余年销售行业回归雕塑创作，以一种使命感重拾初心。
+        </p>
+        <p data-zh="他擅长以雕塑手法塑造众生相，探索生命、生活本质与时代人的精神状态。创作内核呼应东方哲学智慧，将自身成长、体悟后对人性的洞察艺化成作品，在人物与动物的虚实演化中，通往荒诞、矛盾的艺术语境，让观者产生思考及心灵对话。" data-en="He specializes in sculpting the full spectrum of humanity, exploring the essence of life and the spiritual condition of contemporary people. His work draws from Eastern philosophical wisdom, translating personal growth and insight into sculpture. Through the interplay of human and animal forms, he creates a space of absurdity and contradiction that invites contemplation and inner dialogue.">
+          他擅长以雕塑手法塑造众生相，探索生命、生活本质与时代人的精神状态。创作内核呼应东方哲学智慧，将自身成长、体悟后对人性的洞察艺化成作品，在人物与动物的虚实演化中，通往荒诞、矛盾的艺术语境，让观者产生思考及心灵对话。
+        </p>
+        <div class="philosophy-cards">
+          <div class="phil-card">
+            <div class="phil-num">一</div>
+            <div class="phil-content">
+              <h4 data-zh="明心见性" data-en="Clarity of Mind, Seeing Nature">明心见性</h4>
+              <p data-zh="生命本有的觉知，不需外求，只需拨开遮蔽" data-en="The inherent awareness of life needs no outward seeking — only the removal of what conceals it.">生命本有的觉知，不需外求，只需拨开遮蔽</p>
+            </div>
+          </div>
+          <div class="phil-card">
+            <div class="phil-num">二</div>
+            <div class="phil-content">
+              <h4 data-zh="道法自然" data-en="The Tao Follows Nature">道法自然</h4>
+              <p data-zh='不是"我去做"，而是"让它成为"，生命有其自身的力量' data-en="Not 'I do it' but 'let it become' — life has its own force.">不是"我去做"，而是"让它成为"，生命有其自身的力量</p>
+            </div>
+          </div>
+          <div class="phil-card">
+            <div class="phil-num">三</div>
+            <div class="phil-content">
+              <h4 data-zh="渡者自渡" data-en="The Crosser Crosses Themselves">渡者自渡</h4>
+              <p data-zh="每个人都在渡自己，作品是镜子，不是答案" data-en="Everyone crosses their own river. The work is a mirror, not an answer.">每个人都在渡自己，作品是镜子，不是答案</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Works -->
+<section id="works">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">SELECTED WORKS</span>
+      <h2 class="section-title" data-zh="作品集" data-en="Works">作品集</h2>
+      <div class="section-title-en" data-zh="2021 — 2026" data-en="2021 — 2026">2021 — 2026</div>
+      <div class="gold-line"></div>
+    </div>
+
+    <!-- Status filters -->
+    <div class="works-filter" id="statusFilter">
+      <button class="filter-btn active" data-status="all" onclick="filterStatus('all')">
+        <span data-zh="全部" data-en="All">全部</span>
+      </button>
+      <button class="filter-btn" data-status="available" onclick="filterStatus('available')" style="border-color:rgba(201,162,39,0.4)">
+        <span data-zh="🟡 可收藏" data-en="🟡 Available">🟡 可收藏</span>
+      </button>
+      <button class="filter-btn" data-status="custom" onclick="filterStatus('custom')" style="border-color:rgba(107,159,126,0.4)">
+        <span data-zh="🟢 可定制" data-en="🟢 Custom Order">🟢 可定制</span>
+      </button>
+      <button class="filter-btn" data-status="exhibition" onclick="filterStatus('exhibition')" style="border-color:rgba(107,139,191,0.4)">
+        <span data-zh="🔵 展示作品" data-en="🔵 Exhibition">🔵 展示作品</span>
+      </button>
+    </div>
+
+    <!-- Series filters -->
+    <div class="works-filter" id="seriesFilter">
+      <button class="filter-btn active-series" data-series="all" onclick="filterSeries('all')">
+        <span data-zh="所有系列" data-en="All Series">所有系列</span>
+      </button>
+    </div>
+
+    <div class="works-grid" id="worksGrid"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightboxBg(event)">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <div class="lb-header">
+      <span class="lb-series" id="lbSeries"></span>
+      <button class="lb-close" onclick="closeLightbox()">&times;</button>
+    </div>
+    <div class="lb-body">
+      <div class="lb-img-area">
+        <div class="lb-images" id="lbImages"></div>
+        <div class="lb-swipe-hint" id="lbSwipeHint">← 左右滑动切换图片 →</div>
+      </div>
+      <div class="lb-info-panel">
+        <div class="lb-info" id="lbInfo"></div>
+        <div class="lb-thumbs-wrap" id="lbThumbsWrap"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Method -->
+<section id="method">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">METHODOLOGY</span>
+      <h2 class="section-title" data-zh="创作方法论" data-en="Creative Methodology">创作方法论</h2>
+      <div class="section-title-en" data-zh="三种路径的合流" data-en="Convergence of Three Paths">三种路径的合流</div>
+      <div class="gold-line"></div>
+    </div>
+    <div class="method-cards reveal">
+      <div class="method-card">
+        <div class="method-icon">🔍</div>
+        <div class="method-title" data-zh="格物·形体研究" data-en="Investigation of Things">格物·形体研究</div>
+        <div class="method-sub" data-zh="有意识提炼生命本质" data-en="Conscious refinement of life's essence">有意识提炼生命本质</div>
+        <div class="method-desc" data-zh=""我去找它"——每年保持15—30天写生，让创作思想回到客观事实，让创作回归有养分的土壤。" data-en="'I go and find it' — maintaining 15 to 30 days of life sketching each year, grounding creative thought in objective reality.">"我去找它"——每年保持15—30天写生，让创作思想回到客观事实，让创作回归有养分的土壤。</div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">💫</div>
+        <div class="method-title" data-zh="渡·生命记忆" data-en="Crossing · Life Memory">渡·生命记忆</div>
+        <div class="method-sub" data-zh="有意识 + 直觉感受" data-en="Consciousness + Intuitive feeling">有意识 + 直觉感受</div>
+        <div class="method-desc" data-zh=""我感受到它"——在意识与直觉之间，生命记忆自然涌现，成为形体。" data-en="'I feel it' — between consciousness and intuition, life memories naturally surface and become form.">"我感受到它"——在意识与直觉之间，生命记忆自然涌现，成为形体。</div>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">🌊</div>
+        <div class="method-title" data-zh="思想试验·无意识绘画" data-en="Thought Experiment · Unconscious Drawing">思想试验·无意识绘画试验</div>
+        <div class="method-sub" data-zh="有意识不干涉" data-en="Conscious non-interference">有意识不干涉</div>
+        <div class="method-desc" data-zh=""让它自己出来"——有意识不干涉绘画，让潜意识唤醒生命自身的力量。线条有生命力，图有张力。" data-en="'Let it emerge on its own' — consciously not interfering, allowing the subconscious to awaken life's own power.">"让它自己出来"——有意识不干涉绘画，让潜意识唤醒生命自身的力量。</div>
+      </div>
+    </div>
+    <div class="method-spirit reveal" data-zh="终极方向：三者合流，让有意识的精准和无意识的鲜活合流" data-en="Ultimate Direction: Convergence of all three — where conscious precision and unconscious vitality merge.">
+      终极方向：三者合流，让有意识的精准和无意识的鲜活合流
+    </div>
+  </div>
+</section>
+
+<!-- Chronology -->
+<section id="chronology">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">CHRONOLOGY</span>
+      <h2 class="section-title" data-zh="作品年表" data-en="Work Chronology">作品年表</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-year">2021–22</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《消失的空》系列" data-en="Disappearing Void Series">《消失的空》系列</div>
+          <div class="timeline-desc" data-zh="回归、破碎、重建 — 重返雕塑，完成自我" data-en="Return, fragmentation, rebuilding — a return to sculpture, completing the self.">回归、破碎、重建 — 重返雕塑，完成自我</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《诸相非相》系列" data-en="All Forms Are No-Forms Series">《诸相非相》系列</div>
+          <div class="timeline-desc" data-zh="解构自我（我相→人相→众生相→寿者相）" data-en="Deconstructing the self (Self → Other → All Beings → Lifespan)">解构自我（我相→人相→众生相→寿者相）</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023–24</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《继续生长》1&2系列" data-en="Keep Growing Series I & II">《继续生长》1&2系列</div>
+          <div class="timeline-desc" data-zh="向外探索、生命生长" data-en="Outward exploration, the growth of life">向外探索、生命生长</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《无题》系列 + 《渡》（含灯光/方块装置）" data-en="Untitled Series + Crossing (Light & Cube Installations)">《无题》系列 + 《渡》（含灯光/方块装置）</div>
+          <div class="timeline-desc" data-zh="东方智慧、生命本质，装置艺术探索" data-en="Eastern wisdom, essence of life, installation art exploration">东方智慧、生命本质，装置艺术探索</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《众生者》+ 《生命记忆》系列" data-en="All Beings + Life Memory Series">《众生者》+ 《生命记忆》系列</div>
+          <div class="timeline-desc" data-zh="回归生命、记忆、温度" data-en="Returning to life, memory, warmth">回归生命、记忆、温度</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025–</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《格物·形体研究》系列" data-en="Investigation of Things Series">《格物·形体研究》系列</div>
+          <div class="timeline-desc" data-zh="底层探索：从人体写生找本质的美，可接受定制" data-en="Deep exploration: finding essential beauty from life drawing. Custom orders available.">底层探索：从人体写生找本质的美，可接受定制</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2026–</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-series" data-zh="《思想试验》无意识绘画" data-en="Thought Experiment — Unconscious Painting">《思想试验》无意识绘画试验</div>
+          <div class="timeline-desc" data-zh="无意识释放：让潜意识唤醒生命自身的力量" data-en="Unconscious release: letting the subconscious awaken life's own power">无意识释放：让潜意识唤醒生命自身的力量</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Meaning -->
+<section id="meaning">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">SOCIAL VALUE</span>
+      <h2 class="section-title" data-zh="社会意义" data-en="Social Meaning">社会意义</h2>
+      <div class="section-title-en" data-zh="在过度理性化、工业化、技术化的时代，重新唤醒生命本有的力量" data-en="In an age of over-rationalization and industrialization, re-awakening the inherent power of life">在过度理性化、工业化、技术化的时代，重新唤醒生命本有的力量</div>
+      <div class="gold-line"></div>
+    </div>
+    <div class="meaning-cards reveal">
+      <div class="meaning-card">
+        <div class="meaning-icon">🪞</div>
+        <div class="meaning-title" data-zh="唤醒" data-en="AWAKENING">唤醒</div>
+        <div class="meaning-desc" data-zh="在这个让人焦虑、让人迷失的时代，作品是一面镜子，让站在它面前的人，重新看见自己生命本有的力量。" data-en="In this age of anxiety and disorientation, the work is a mirror — letting the viewer rediscover the inherent power within their own life.">在这个让人焦虑、让人迷失的时代，作品是一面镜子，让站在它面前的人，重新看见自己生命本有的力量。</div>
+      </div>
+      <div class="meaning-card">
+        <div class="meaning-icon">🌊</div>
+        <div class="meaning-title" data-zh="照见" data-en="REFLECTING">照见</div>
+        <div class="meaning-desc" data-zh='作品不是给观众看"范荣琦在想什么"，而是让观众发现自己正在想什么。' data-en="The work does not ask 'what is Fan Rongqi thinking?' — it asks the viewer to discover what they themselves are thinking.">作品不是给观众看"范荣琦在想什么"，而是让观众发现自己正在想什么。</div>
+      </div>
+      <div class="meaning-card">
+        <div class="meaning-icon">✨</div>
+        <div class="meaning-title" data-zh="陪伴" data-en="COMPANIONSHIP">陪伴</div>
+        <div class="meaning-desc" data-zh="每件雕塑创作的过程 = 一个短暂的人生体验。观者在作品前停留的那一刻，就是与自己对话的时刻。" data-en="Each sculpture's creation is a brief life experience. The moment a viewer pauses before a work is the moment they dialogue with themselves.">每件雕塑创作的过程 = 一个短暂的人生体验。观者在作品前停留的那一刻，就是与自己对话的时刻。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Awards -->
+<section id="awards">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">AWARDS & EXHIBITIONS</span>
+      <h2 class="section-title" data-zh="获奖与展览" data-en="Awards & Exhibitions">获奖与展览</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="awards-list reveal">
+      <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-text" data-zh='<strong>第三届中国香港青年美术奖 · 金奖</strong> ｜ 《诸相非相之"众生相"》' data-en="<strong>3rd Hong Kong, China Youth Fine Arts Award · Gold Prize</strong> | Phenomena — All Beings">
+          <strong>第三届中国香港青年美术奖 · 金奖</strong> ｜ 《诸相非相之"众生相"》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥈</div>
+        <div class="award-text" data-zh='<strong>第十二届福建省工艺美术精品"争艳杯"大赛 · 银奖</strong> ｜ 《生物-第9527号》' data-en="<strong>12th Fujian Province Arts & Crafts Excellence Award · Silver Prize</strong> | Creature No.9527">
+          <strong>第十二届福建省工艺美术精品"争艳杯"大赛 · 银奖</strong> ｜ 《生物-第9527号》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥈</div>
+        <div class="award-text" data-zh='<strong>第五届当代艺术与设计大赛 · 二等奖</strong> ｜ 《诸相非相之"我相"》' data-en="<strong>5th Contemporary Art & Design Competition · Second Prize</strong> | Phenomena — Self-Image">
+          <strong>第五届当代艺术与设计大赛 · 二等奖</strong> ｜ 《诸相非相之"我相"》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥈</div>
+        <div class="award-text" data-zh='<strong>福建省工艺美术（雕塑）展评选 · 银奖</strong> ｜ 《诸相非相之"我相"》' data-en="<strong>Fujian Province Arts & Crafts (Sculpture) Exhibition · Silver Prize</strong> | Phenomena — Self-Image">
+          <strong>福建省工艺美术（雕塑）展评选 · 银奖</strong> ｜ 《诸相非相之"我相"》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-text" data-zh='<strong>第五届福建省创意设计大赛 · 铜奖</strong> ｜ 《哈皮NO.1》' data-en="<strong>5th Fujian Province Creative Design Competition · Bronze Prize</strong> | Happy No.1">
+          <strong>第五届福建省创意设计大赛 · 铜奖</strong> ｜ 《哈皮NO.1》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-text" data-zh='<strong>第十三届福建省工艺美术精品"争艳杯"大赛 · 铜奖</strong> ｜ 《无题-2025NO.1》' data-en="<strong>13th Fujian Province Arts & Crafts Excellence Award · Bronze Prize</strong> | Untitled-2025 No.1">
+          <strong>第十三届福建省工艺美术精品"争艳杯"大赛 · 铜奖</strong> ｜ 《无题-2025NO.1》
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🎨</div>
+        <div class="award-text" data-zh="<strong>个展 · 逆商*逆熵</strong> ｜ 2025年" data-en="<strong>Solo Exhibition · Adversity × Negentropy</strong> | 2025">
+          <strong>个展 · 逆商*逆熵</strong> ｜ 2025年
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🎨</div>
+        <div class="award-text" data-zh="<strong>个人首展 · 消失的空</strong> ｜ 2024年" data-en="<strong>Debut Solo Exhibition · Disappearing Void</strong> | 2024">
+          <strong>个人首展 · 消失的空</strong> ｜ 2024年
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">CONTACT</span>
+      <h2 class="section-title" data-zh="联系方式" data-en="Contact">联系方式</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="contact-inner reveal">
+      <div class="contact-info">
+        <h3 data-zh="收藏咨询 · 定制委托" data-en="Collection & Custom Commission">收藏咨询 · 定制委托</h3>
+        <div class="contact-row">
+          <div class="contact-label" data-zh="微信" data-en="WeChat">微信</div>
+          <div class="contact-val">13559459698</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label" data-zh="小红书" data-en="Xiaohongshu">小红书</div>
+          <div class="contact-val">2149404178 · 范荣琦</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label" data-zh="工作室" data-en="Studio">工作室</div>
+          <div class="contact-val" data-zh="叮咚锵文化雕塑工作室" data-en="Ding Dong Qiang Cultural Sculpture Studio">叮咚锵文化雕塑工作室</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label" data-zh="定制" data-en="Custom">定制</div>
+          <div class="contact-val" data-zh="可接受格物系列、继续生长2、无题装置系列定制委托" data-en="Custom commissions available for Investigation of Things, Keep Growing II, and Untitled Installation series">可接受格物系列、继续生长2、无题装置系列定制委托</div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label" data-zh="邮箱" data-en="Email">邮箱</div>
+          <div class="contact-val">dingdongqiangart@gmail.com<br>826172480@qq.com</div>
+        </div>
+      </div>
+      <div class="contact-tagline">
+        <div class="contact-tagline-zh" data-zh="透过作品，唤醒生命本有的力量" data-en="Awakening the inherent power of life through sculpture">透过作品，唤醒生命本有的力量</div>
+        <div class="contact-tagline-en" data-zh="— 范荣琦 · 叮咚锵文化雕塑工作室" data-en="— Fan Rongqi · Ding Dong Qiang Cultural Sculpture Studio">— 范荣琦 · 叮咚锵文化雕塑工作室</div>
+        <div style="margin-top:24px">
+          <a href="#works" class="btn-primary" data-zh="浏览作品" data-en="View Works" style="font-size:0.8rem;padding:10px 24px">浏览作品</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Purchase Terms -->
+<section id="terms" style="background:var(--bg2);padding:60px 0 50px;">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">TERMS</span>
+      <h2 class="section-title" data-zh="收藏须知" data-en="Purchase Terms">收藏须知</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="reveal" style="max-width:820px;margin:0 auto;">
+
+      <!-- 价格说明 -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <span style="color:var(--gold);font-size:1.1rem;">💰</span>
+          <h4 style="color:var(--gold);font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;margin:0;" data-zh="价格说明" data-en="Pricing Notice">价格说明</h4>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;color:var(--text2);font-size:0.9rem;line-height:2.2;">
+          <li data-zh="· 网站所列收藏价均为作品裸价，不含任何税费及运费。" data-en="· Listed prices are for the artwork only, excluding all taxes and shipping fees.">· 网站所列收藏价均为作品裸价，不含任何税费及运费。</li>
+          <li data-zh="· 国内运输费用以实际快递/物流报价为准，由买方承担。" data-en="· Domestic shipping costs are borne by the buyer, based on actual courier/freight quotes.">· 国内运输费用以实际快递/物流报价为准，由买方承担。</li>
+          <li data-zh="· 国际物流运输费用（含关税、进口税及保险）由买方承担，具体费用因目的地国家而异，请咨询工作室获取估价。" data-en="· International shipping (including customs duties, import taxes and insurance) is borne by the buyer. Costs vary by destination — please contact the studio for an estimate.">· 国际物流运输费用（含关税、进口税及保险）由买方承担，具体费用因目的地国家而异，请咨询工作室获取估价。</li>
+          <li data-zh="· 价格不含增值税（VAT）及其他适用税项。如需开具发票，请提前告知，费用另计。" data-en="· Prices exclude VAT and other applicable taxes. Please advise if an invoice is required — additional charges may apply.">· 价格不含增值税（VAT）及其他适用税项。如需开具发票，请提前告知，费用另计。</li>
+          <li data-zh="· 价格有效期以最终确认订单时的报价为准，网站标价仅供参考。" data-en="· Prices are subject to the final confirmed quote at order time; website prices are for reference only.">· 价格有效期以最终确认订单时的报价为准，网站标价仅供参考。</li>
+        </ul>
+      </div>
+
+      <!-- 定制与交付 -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <span style="color:var(--gold);font-size:1.1rem;">🔧</span>
+          <h4 style="color:var(--gold);font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;margin:0;" data-zh="定制与交付" data-en="Commission & Delivery">定制与交付</h4>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;color:var(--text2);font-size:0.9rem;line-height:2.2;">
+          <li data-zh="· 限量版作品按生产顺序编号，每版附原作艺术家证书（COA）。" data-en="· Limited edition works are numbered in production order. Each piece is accompanied by a Certificate of Authenticity (COA) signed by the artist.">· 限量版作品按生产顺序编号，每版附原作艺术家证书（COA）。</li>
+          <li data-zh="· 可定制系列（格物、继续生长2、无题装置等）需提前与工作室沟通材质、尺寸及工期，交货周期约3–6个月。" data-en="· Commissionable works (Investigation of Things, Keep Growing II, Untitled Installations, etc.) require prior consultation on materials, dimensions and lead time. Delivery is approximately 3–6 months.">· 可定制系列（格物、继续生长2、无题装置等）需提前与工作室沟通材质、尺寸及工期，交货周期约3–6个月。</li>
+          <li data-zh="· 作品出库前经艺术家本人验收签字，确保品质。" data-en="· Every piece is personally inspected and signed off by the artist before leaving the studio.">· 作品出库前经艺术家本人验收签字，确保品质。</li>
+          <li data-zh="· 专业木箱包装，脆弱部件另加防震缓冲，最大程度保障运输安全。" data-en="· All works are packed in professional wooden crates with additional shock-absorbing padding for fragile components.">· 专业木箱包装，脆弱部件另加防震缓冲，最大程度保障运输安全。</li>
+        </ul>
+      </div>
+
+      <!-- 支付与售后 -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <span style="color:var(--gold);font-size:1.1rem;">📋</span>
+          <h4 style="color:var(--gold);font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;margin:0;" data-zh="支付与售后" data-en="Payment & After-Sale">支付与售后</h4>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;color:var(--text2);font-size:0.9rem;line-height:2.2;">
+          <li data-zh="· 现有成品需付全款后方可安排发货；定制委托需支付50%定金后方可排期开工，交货前付清余款。" data-en="· In-stock works require full payment before shipment. Commissioned works require a 50% deposit to begin production; the balance is due before delivery.">· 现有成品需付全款后方可安排发货；定制委托需支付50%定金后方可排期开工，交货前付清余款。</li>
+          <li data-zh="· 支持人民币（微信支付／银行转账）及美元（国际电汇），具体以双方协议为准。" data-en="· Payment accepted in CNY (WeChat Pay / bank transfer) and USD (international wire). Details subject to mutual agreement.">· 支持人民币（微信支付／银行转账）及美元（国际电汇），具体以双方协议为准。</li>
+          <li data-zh="· 艺术品因其特殊性，非质量问题不支持退换货。收藏前请充分了解作品详情并确认意向。" data-en="· Artworks are non-refundable and non-exchangeable except in cases of verified quality defects. Please review all details carefully before purchase.">· 艺术品因其特殊性，非质量问题不支持退换货。收藏前请充分了解作品详情并确认意向。</li>
+          <li data-zh="· 运输途中造成的损坏，请于签收时当场存证并在24小时内联系工作室处理。" data-en="· For any damage occurring during transit, please document on receipt and contact the studio within 24 hours.">· 运输途中造成的损坏，请于签收时当场存证并在24小时内联系工作室处理。</li>
+        </ul>
+      </div>
+
+      <p style="text-align:center;color:var(--text3);font-size:0.8rem;margin-top:24px;line-height:1.8;" data-zh="以上条款最终解释权归叮咚锵文化雕塑工作室所有。如有疑问，欢迎通过微信与工作室联系确认。" data-en="These terms are subject to final interpretation by Ding Dong Qiang Cultural Sculpture Studio. For any questions, please contact the studio via WeChat.">
+        以上条款最终解释权归叮咚锵文化雕塑工作室所有。如有疑问，欢迎通过微信与工作室联系确认。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-zh="© 2026 范荣琦 · 叮咚锵文化雕塑工作室 · 保留所有权利" data-en="© 2026 Fan Rongqi · Ding Dong Qiang Cultural Sculpture Studio · All Rights Reserved">
+    © 2026 范荣琦 · 叮咚锵文化雕塑工作室 · 保留所有权利
+  </span>
+</footer>
+
+<script>
+// ============================================================
+// Data
+// ============================================================
+const works = [
+  {
+    "id": "xks_1_draft",
+    "title_zh": "别人笑我太疯癫，我笑他人看不穿（手稿版）",
+    "title_en": "They Laugh at My Madness, I Laugh at Their Blindness (Draft Edition)",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2021",
+    "material_zh": "青铜／不锈钢（烤漆/贴金，颜色可定制）",
+    "material_en": "Bronze / Stainless Steel (lacquer/gold leaf, custom color available)",
+    "size": "9.5×9.5×21 cm",
+    "quote_zh": "欲望是填不满的山谷",
+    "quote_en": "Desires are valleys never filled.",
+    "price_zh": "¥2,000 / 版 ｜ 限量100版",
+    "price_en": "¥2,000 / Edition ｜ Limited 100 Editions",
+    "status": "available",
+    "img": "xks_1_draft_main.jpeg",
+    "images": [
+      "xks_1_draft_main.jpeg",
+      "xks_1_draft_1.jpg",
+      "xks_1_draft_2.jpg",
+      "xks_1_draft_3.jpg",
+      "xks_1_draft_4.jpg"
+    ]
+  },
+  {
+    "id": "xks_1",
+    "title_zh": "别人笑我太疯癫，我笑他人看不穿",
+    "title_en": "Others Laugh at My Madness",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2021",
+    "material_zh": "青铜／不锈钢（烤漆，颜色可定制）",
+    "material_en": "Bronze / Stainless Steel (custom color available)",
+    "size": "35×16.5×16 cm",
+    "quote_zh": "欲望是填不满的山谷，食饮有节，起居有常，不妄作劳，方能形与神俱。",
+    "quote_en": "Desires are valleys never filled. Only with moderation can form and spirit unite.",
+    "price_zh": "¥10,000 / 版 ｜ 限量33版",
+    "price_en": "¥10,000 / Edition ｜ Limited 33 Editions",
+    "status": "available",
+    "img": "xks_1.jpg",
+    "images": [
+      "xks_1.jpg",
+      "xks_1_photo_1.jpg",
+      "xks_1_photo_2.jpg",
+      "xks_1_photo_3.jpg",
+      "xks_1_photo_4.jpg",
+      "xks_1_photo_5.jpg",
+      "xks_1_photo_6.jpg"
+    ]
+  },
+  {
+    "id": "xks_2",
+    "title_zh": "青苹果",
+    "title_en": "Green Apple",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2022",
+    "material_zh": "青铜、热着色",
+    "material_en": "Bronze, Hot Patina",
+    "size": "48×25×10 cm",
+    "quote_zh": "「苹果」创造了世界，也改变过世界。小时候的「苹果」，也改变了我们，至少今天还怀念它的香味！",
+    "quote_en": "The Apple created the world and changed it. The one from childhood changed us too — at least we still remember its fragrance.",
+    "price_zh": "¥23,000 / 版 ｜ 限量9版",
+    "price_en": "¥23,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "xks_2.jpg",
+    "images": [
+      "xks_2.jpg"
+    ]
+  },
+  {
+    "id": "xks_3",
+    "title_zh": "孙行者",
+    "title_en": "The Pilgrim",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2022",
+    "material_zh": "青铜",
+    "material_en": "Bronze",
+    "size": "70×38.6×25 cm",
+    "quote_zh": "每个人都是行者，每个中国人心中都住着一个孙悟空。新的时代新的变局，整装重新出发，从心出发。",
+    "quote_en": "Everyone is a pilgrim. Every Chinese heart holds a Sun Wukong. A new era, a new journey — departing from the heart.",
+    "price_zh": "¥58,000 / 版 ｜ 限量9版",
+    "price_en": "¥58,000 / Edition | Limited to 9",
+    "status": "available",
+    "img": "xks_3.jpg",
+    "images": [
+      "xks_3.jpg",
+      "sun_photo_1.jpg",
+      "sun_photo_2.jpg",
+      "sun_photo_3.jpg",
+      "sun_photo_4.jpg",
+      "sun_photo_5.jpg",
+      "sun_photo_6.jpg"
+    ]
+  },
+  {
+    "id": "xks_4",
+    "title_zh": "生物-第9527号",
+    "title_en": "Creature No.9527",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2022",
+    "material_zh": "青铜",
+    "material_en": "Bronze",
+    "size": "60×60×38 cm",
+    "quote_zh": "人生都是这么无厘头，每个人平凡即非凡，我们非凡。",
+    "quote_en": "Life is so absurd. Every ordinary person is extraordinary. We are extraordinary.",
+    "price_zh": "¥66,000 / 版 ｜ 限量9版",
+    "price_en": "¥66,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "xks_4.jpg",
+    "images": [
+      "xks_4.jpg",
+      "bio_9527_photo_1.jpg",
+      "bio_9527_photo_2.jpg",
+      "bio_9527_photo_3.jpg",
+      "bio_9527_photo_4.jpg",
+      "bio_9527_photo_5.jpg",
+      "bio_9527_photo_6.jpg"
+    ]
+  },
+  {
+    "id": "xks_5",
+    "title_zh": "哈皮NO.1",
+    "title_en": "Happy NO.1",
+    "series_zh": "消失的空",
+    "series_en": "Disappearing Void",
+    "year": "2022",
+    "material_zh": "青铜、热着色",
+    "material_en": "Bronze, Hot Patina",
+    "size": "60×30×22.4 cm",
+    "quote_zh": "我很丑但很温柔，无论如何做一只快乐的小狗。接纳自己是人生最重要的一堂课！",
+    "quote_en": "Ugly but gentle. Be a happy dog no matter what. Self-acceptance is life's most important lesson.",
+    "price_zh": "¥48,000 / 版 ｜ 限量9版 · 手办版(不锈钢)¥28,000 / 手办版(青铜)¥22,000 限量33版",
+    "price_en": "¥48,000 / Edition ｜ Ltd.9 · Figure(Stainless Steel) ¥28,000 / Figure(Bronze) ¥22,000 Ltd.33",
+    "size_note_zh": "原作 60×30×22.4 cm ｜ 手办版 35×17.6×13 cm · 青铜/不锈钢",
+    "size_note_en": "Original 60×30×22.4 cm ｜ Figure 35×17.6×13 cm · Bronze/Stainless Steel",
+    "status": "available",
+    "img": "xks_5.jpg",
+    "images": [
+      "xks_5.jpg",
+      "xks_hapy_three.jpg",
+      "xks_hapy_three_1.jpg",
+      "xks_hapy_three_2.jpg",
+      "hapy_fig_photo_1.jpg",
+      "hapy_fig_photo_2.jpg",
+      "hapy_fig_photo_3.jpg",
+      "hapy_fig_photo_4.jpg",
+      "hapy_fig_photo_5.jpg",
+      "hapy_fig_photo_6.jpg"
+    ]
+  },
+  {
+    "id": "zxfx_overview",
+    "title_zh": "诸相非相系列总览",
+    "title_en": "All Forms Are No-Forms — Overview",
+    "series_zh": "诸相非相",
+    "series_en": "All Forms Are No-Forms",
+    "year": "2022",
+    "material_zh": "不锈钢",
+    "material_en": "Stainless Steel",
+    "size": "-",
+    "quote_zh": "凡所有相，皆是虚妄。若见诸相非相，即见如来。《金刚经》",
+    "quote_en": "All appearances are illusory. When all forms are seen as no-forms, the Tathagata is seen. — Diamond Sutra",
+    "price_zh": "-",
+    "price_en": "-",
+    "status": "exhibition",
+    "img": "zxfx_overview.jpg",
+    "images": [
+      "zxfx_overview.jpg",
+      "zxfx_overview_1.jpg",
+      "zxfx_overview_2.jpg",
+      "zxfx_overview_3.jpg",
+      "zxfx_overview_4.jpg"
+    ]
+  },
+  {
+    "id": "zxfx_1",
+    "title_zh": "诸相非相之「我相」",
+    "title_en": "Phenomena — Self-Image",
+    "series_zh": "诸相非相",
+    "series_en": "All Forms Are No-Forms",
+    "year": "2022",
+    "material_zh": "不锈钢",
+    "material_en": "Stainless Steel",
+    "size": "68×35×28 cm",
+    "quote_zh": "我看到和认为的那个别人，才是我！正视自我是一辈子要修的课。",
+    "quote_en": "The other I see and judge — that is me. Seeing oneself clearly is a lifelong practice.",
+    "price_zh": "¥66,000 / 版 ｜ 限量9版",
+    "price_en": "¥66,000 / Edition | Limited to 9",
+    "status": "available",
+    "img": "zxfx_1_woxiang.jpg",
+    "images": [
+      "zxfx_1_woxiang.jpg",
+      "zxfx_1_woxiang_photo_1.jpg",
+      "zxfx_1_woxiang_photo_2.jpg",
+      "zxfx_1_woxiang_photo_3.jpg",
+      "zxfx_1_woxiang_photo_4.jpg"
+    ]
+  },
+  {
+    "id": "zxfx_2",
+    "title_zh": "诸相非相之「人相」",
+    "title_en": "Phenomena — Human-Image",
+    "series_zh": "诸相非相",
+    "series_en": "All Forms Are No-Forms",
+    "year": "2022",
+    "material_zh": "不锈钢",
+    "material_en": "Stainless Steel",
+    "size": "50×41×20 和 50×27×19 cm",
+    "quote_zh": "分别心是执着于我，执着于人、事、物，贪嗔痴…至也",
+    "quote_en": "Discriminating mind clings to self, to people, to things. Greed, aversion, delusion — these are its roots.",
+    "price_zh": "¥92,000 / 版 ｜ 限量9版",
+    "price_en": "¥92,000 / Edition | Limited to 9",
+    "status": "available",
+    "img": "zxfx_2_renxiang.jpg",
+    "images": [
+      "zxfx_2_renxiang.jpg",
+      "zxfx_2_renxiang_photo_1.jpg"
+    ]
+  },
+  {
+    "id": "zxfx_3",
+    "title_zh": "诸相非相之「众生相」",
+    "title_en": "Phenomena — All-Beings",
+    "series_zh": "诸相非相",
+    "series_en": "All Forms Are No-Forms",
+    "year": "2022",
+    "material_zh": "不锈钢",
+    "material_en": "Stainless Steel",
+    "size": "150×35×23 cm",
+    "quote_zh": "本自具足，本自佛性，每个的我们即非众生，亦非不众生。舍是生命意义的起点，空是生命明日之华屋。",
+    "quote_en": "Inherently complete, inherently Buddha-nature. Neither beings nor non-beings. Letting go begins meaning; emptiness is tomorrow's dwelling.",
+    "price_zh": "¥98,000 / 版 ｜ 限量9版",
+    "price_en": "¥98,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "zxfx_3_zhongsheng.jpg",
+    "images": [
+      "zxfx_3_zhongsheng.jpg",
+      "zxfx_3_zhongsheng_photo_1.jpg",
+      "zxfx_3_zhongsheng_photo_2.jpg",
+      "zxfx_3_zhongsheng_photo_3.jpg",
+      "zxfx_3_zhongsheng_photo_4.jpg",
+      "zxfx_3_zhongsheng_photo_5.jpg"
+    ]
+  },
+  {
+    "id": "zxfx_4",
+    "title_zh": "诸相非相之「寿者相」",
+    "title_en": "Phenomena — Lifespan",
+    "series_zh": "诸相非相",
+    "series_en": "All Forms Are No-Forms",
+    "year": "2022",
+    "material_zh": "不锈钢",
+    "material_en": "Stainless Steel",
+    "size": "50×38×25 cm",
+    "quote_zh": "不生不灭，不垢不净，不增不减。时间、世界是人类之执着假想之空，打破——「消失的空」",
+    "quote_en": "No birth, no death. No purity, no impurity. Time and world are illusions — break through: the Disappearing Void.",
+    "price_zh": "¥86,000 / 版 ｜ 限量9版",
+    "price_en": "¥86,000 / Edition | Limited to 9",
+    "status": "available",
+    "img": "zxfx_4_shouxiang.jpg",
+    "images": [
+      "zxfx_4_shouxiang.jpg",
+      "zxfx_4_shouxiang_photo_2.jpg",
+      "zxfx_4_shouxiang_photo_3.jpg"
+    ]
+  },
+  {
+    "id": "jxsz1_1",
+    "title_zh": "继续生长·春—空中有朵雨做的云",
+    "title_en": "Keep Growing I · Spring — A Cloud Made of Rain",
+    "series_zh": "继续生长1",
+    "series_en": "Keep Growing I",
+    "year": "2023",
+    "material_zh": "青铜（热着色、丙烯手绘）",
+    "material_en": "Bronze, Hot Patina, Acrylic Hand-painted",
+    "size": "26.6×13×50 cm",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "¥33,000 / 版 ｜ 限量9版",
+    "price_en": "¥33,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "jxsz1_chun1.jpg",
+    "images": [
+      "jxsz1_chun1.jpg"
+    ]
+  },
+  {
+    "id": "jxsz1_2",
+    "title_zh": "继续生长·春—奏起的乐章",
+    "title_en": "Keep Growing I · Spring — The Rising Symphony",
+    "series_zh": "继续生长1",
+    "series_en": "Keep Growing I",
+    "year": "2023",
+    "material_zh": "青铜（丙烯手绘、手工贴金银铂）",
+    "material_en": "Bronze, Acrylic Hand-painted, Gold/Silver Foil",
+    "size": "21.4×16.9×50 cm",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "¥33,000 / 版 ｜ 限量9版",
+    "price_en": "¥33,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "jxsz1_chun2.jpg",
+    "images": [
+      "jxsz1_chun2.jpg"
+    ]
+  },
+  {
+    "id": "jxsz1_3",
+    "title_zh": "继续生长·春—吟诗的几何（曾几何时）",
+    "title_en": "Keep Growing I · Spring — Poetic Geometry",
+    "series_zh": "继续生长1",
+    "series_en": "Keep Growing I",
+    "year": "2023",
+    "material_zh": "青铜（热着色、手工贴金银铂）",
+    "material_en": "Bronze, Hot Patina, Gold/Silver Foil",
+    "size": "55×28.7×26 cm",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "¥38,000 / 版 ｜ 限量9版",
+    "price_en": "¥38,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "jxsz1_chun3.jpg",
+    "images": [
+      "jxsz1_chun3.jpg"
+    ]
+  },
+  {
+    "id": "jxsz1_4",
+    "title_zh": "继续生长·秋—天赐的果实",
+    "title_en": "Keep Growing I · Autumn — Heaven-sent Fruits",
+    "series_zh": "继续生长1",
+    "series_en": "Keep Growing I",
+    "year": "2023",
+    "material_zh": "青铜（丙烯手绘、手工贴金银铂）",
+    "material_en": "Bronze, Acrylic Hand-painted, Gold/Silver Foil",
+    "size": "60×17×50 cm",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "¥33,000 / 版 ｜ 限量9版",
+    "price_en": "¥33,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "jxsz1_qiu.jpg",
+    "images": [
+      "jxsz1_qiu.jpg"
+    ]
+  },
+  {
+    "id": "jxsz2_1",
+    "title_zh": "继续生长2（一）",
+    "title_en": "Keep Growing II — No.1",
+    "series_zh": "继续生长2",
+    "series_en": "Keep Growing II",
+    "year": "2023–2024",
+    "material_zh": "青铜（可定制）",
+    "material_en": "Bronze (Custom Available)",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "jxsz2_draft.jpg",
+    "images": [
+      "jxsz2_draft.jpg",
+      "jxsz2_draft_1.jpg",
+      "jxsz2_draft_2.jpg"
+    ],
+    "custom_note_zh": "作品完成，数据保存，部分有成品。可接受定制铸造",
+    "custom_note_en": "Work complete, data preserved. Custom casting available."
+  },
+  {
+    "id": "jxsz2_2",
+    "title_zh": "继续生长2（二）",
+    "title_en": "Keep Growing II — No.2",
+    "series_zh": "继续生长2",
+    "series_en": "Keep Growing II",
+    "year": "2023–2024",
+    "material_zh": "青铜（可定制）",
+    "material_en": "Bronze (Custom Available)",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "jxsz2_draft2.jpg",
+    "images": [
+      "jxsz2_draft2.jpg",
+      "jxsz2_draft2_1.jpg"
+    ],
+    "custom_note_zh": "作品完成，数据保存，部分有成品。可接受定制铸造",
+    "custom_note_en": "Work complete, data preserved. Custom casting available."
+  },
+  {
+    "id": "jxsz2_3",
+    "title_zh": "继续生长2（三）",
+    "title_en": "Keep Growing II — No.3",
+    "series_zh": "继续生长2",
+    "series_en": "Keep Growing II",
+    "year": "2023–2024",
+    "material_zh": "青铜（可定制）",
+    "material_en": "Bronze (Custom Available)",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "jxsz2_draft3.jpg",
+    "images": [
+      "jxsz2_draft3.jpg",
+      "jxsz2_draft3_1.jpg"
+    ],
+    "custom_note_zh": "作品完成，数据保存，部分有成品。可接受定制铸造",
+    "custom_note_en": "Work complete, data preserved. Custom casting available."
+  },
+  {
+    "id": "wt_1",
+    "title_zh": "无题*1",
+    "title_en": "Untitled No.1",
+    "series_zh": "无题",
+    "series_en": "Untitled",
+    "year": "2024",
+    "material_zh": "拼接块木",
+    "material_en": "Block Wood (assembled)",
+    "size": "42×50×130 cm",
+    "quote_zh": "不要共饮一杯酒，请为对方斟满你的酒",
+    "quote_en": "Do not share a cup — fill each other's cup to the brim.",
+    "price_zh": "¥50,000 / 版 ｜ 限量9版",
+    "price_en": "¥50,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "wt_1.jpg",
+    "images": [
+      "wt_1.jpg",
+      "wt_1_a.jpg",
+      "wt_1_b.jpg",
+      "wt_1_c.jpg"
+    ]
+  },
+  {
+    "id": "wt_2",
+    "title_zh": "无题*2",
+    "title_en": "Untitled No.2",
+    "series_zh": "无题",
+    "series_en": "Untitled",
+    "year": "2024",
+    "material_zh": "拼接块木",
+    "material_en": "Block Wood (assembled)",
+    "size": "54×19×68 cm",
+    "quote_zh": "我不是胖，是生命的力量",
+    "quote_en": "I am not fat — I am the force of life.",
+    "price_zh": "¥43,000 / 版 ｜ 限量9版",
+    "price_en": "¥43,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "wt_2.jpg",
+    "images": [
+      "wt_2.jpg",
+      "wt_2_a.jpg"
+    ]
+  },
+  {
+    "id": "wt_light_1",
+    "title_zh": "无题·灯光装置1",
+    "title_en": "Untitled · Light Installation No.1",
+    "series_zh": "无题·灯光装置",
+    "series_en": "Untitled · Light Installation",
+    "year": "2024",
+    "material_zh": "雕塑＋可亮灯泡装置（可加装智能化灯光）",
+    "material_en": "Sculpture + LED Bulb Installation (Smart Lighting Available)",
+    "size": "待定",
+    "quote_zh": "头部为可亮灯泡装置 | 可加装智能化灯光",
+    "quote_en": "Head as luminous bulb installation. Smart lighting upgrade available.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "wt_light1_scene_on.png",
+    "images": [
+      "wt_light1_scene_on.png",
+      "wt_light1_scene_off.png",
+      "wt_light1_3d.jpg"
+    ],
+    "custom_note_zh": "泥稿及数据已完成，可接受定制制作",
+    "custom_note_en": "Clay model and data complete. Custom production available."
+  },
+  {
+    "id": "wt_light_2",
+    "title_zh": "无题·灯光装置2",
+    "title_en": "Untitled · Light Installation No.2",
+    "series_zh": "无题·灯光装置",
+    "series_en": "Untitled · Light Installation",
+    "year": "2024",
+    "material_zh": "雕塑＋头部可亮灯泡装置＋时钟底座（可加装智能化灯光）",
+    "material_en": "Sculpture + LED Head + Clock Base (Smart Lighting Available)",
+    "size": "待定",
+    "quote_zh": "头部和云为可亮灯泡装置，底座为时钟装置",
+    "quote_en": "Head and clouds as luminous bulb installations; base as clock device.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "wt_light2_front.jpg",
+    "images": [
+      "wt_light2_front.jpg",
+      "wt_light2_top.jpg"
+    ],
+    "custom_note_zh": "泥稿及数据已完成，可接受定制制作",
+    "custom_note_en": "Clay model and data complete. Custom production available."
+  },
+  {
+    "id": "wt_light_3",
+    "title_zh": "无题·灯光装置3",
+    "title_en": "Untitled · Light Installation No.3",
+    "series_zh": "无题·灯光装置",
+    "series_en": "Untitled · Light Installation",
+    "year": "2024",
+    "material_zh": "雕塑＋头部及四肢触须可亮装置＋透明底座可亮（可加装智能化灯光）",
+    "material_en": "Sculpture + Luminous Head & Limb Antennae + Transparent Base (Smart Available)",
+    "size": "待定",
+    "quote_zh": "头部及四肢的触须为可亮灯泡装置 | 底座露珠为透明可亮装置",
+    "quote_en": "Head and limb antennae as luminous bulb installations; dewdrop base is transparent and luminous.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "wt_light3_front.png",
+    "images": [
+      "wt_light3_front.png",
+      "wt_light3_angle.jpg",
+      "wt_light3_top.jpg"
+    ],
+    "custom_note_zh": "泥稿及数据已完成，可接受定制制作",
+    "custom_note_en": "Clay model and data complete. Custom production available."
+  },
+  {
+    "id": "wt_block_1",
+    "title_zh": "无题·方块可移动装置1",
+    "title_en": "Untitled · Movable Cube Installation No.1",
+    "series_zh": "无题·方块装置",
+    "series_en": "Untitled · Cube Installation",
+    "year": "2024",
+    "material_zh": "雕塑＋方块可移动装置（可加装智能灯光）",
+    "material_en": "Sculpture + Movable Cube Units (Smart Lighting Available)",
+    "size": "待定",
+    "quote_zh": "部分方块为可移动装置，可加装智能化灯光 | 头部切面可加装射灯装置",
+    "quote_en": "Movable cube components. Smart lighting and head spotlight available.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "wt_block1.jpg",
+    "images": [
+      "wt_block1.jpg",
+      "wt_block1_1.jpg",
+      "wt_block1_2.jpg"
+    ],
+    "custom_note_zh": "泥稿及数据已完成，可接受定制制作",
+    "custom_note_en": "Clay model and data complete. Custom production available."
+  },
+  {
+    "id": "wt_block_2",
+    "title_zh": "无题·方块可移动装置2",
+    "title_en": "Untitled · Movable Cube Installation No.2",
+    "series_zh": "无题·方块装置",
+    "series_en": "Untitled · Cube Installation",
+    "year": "2024",
+    "material_zh": "雕塑＋方块可移动装置（可加装智能灯光）",
+    "material_en": "Sculpture + Movable Cube Units (Smart Lighting Available)",
+    "size": "待定",
+    "quote_zh": "方块可移动装置",
+    "quote_en": "Movable cube components.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "wt_block2.jpg",
+    "images": [
+      "wt_block2.jpg",
+      "wt_block2_1.jpg",
+      "wt_block2_2.jpg",
+      "wt_block2_3.jpg",
+      "wt_block2_4.jpg"
+    ],
+    "custom_note_zh": "泥稿及数据已完成，可接受定制制作",
+    "custom_note_en": "Clay model and data complete. Custom production available."
+  },
+  {
+    "id": "du_1",
+    "title_zh": "渡",
+    "title_en": "Crossing",
+    "series_zh": "渡",
+    "series_en": "Crossing",
+    "year": "2024",
+    "material_zh": "青铜、黑石",
+    "material_en": "Bronze, Black Stone",
+    "size": "110×38.6×52 cm",
+    "quote_zh": "渡者自渡——仰望还是低头，见的都是自己",
+    "quote_en": "To cross is to cross oneself — whether you look up or down, you see only yourself.",
+    "price_zh": "¥38,000 / 版 ｜ 限量9版",
+    "price_en": "¥38,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "du_zhongsheng.jpg",
+    "images": [
+      "du_zhongsheng.jpg",
+      "du_photo_1.jpg",
+      "du_photo_2.jpg",
+      "du_photo_3.jpg",
+      "du_photo_4.jpg",
+      "du_photo_5.jpg"
+    ]
+  },
+  {
+    "id": "du_2",
+    "title_zh": "众生者",
+    "title_en": "All Beings",
+    "series_zh": "渡",
+    "series_en": "Crossing",
+    "year": "2025",
+    "material_zh": "泥稿",
+    "material_en": "Clay Model",
+    "size": "29×24×52 cm",
+    "quote_zh": "仰望还是低头，见的都是自己",
+    "quote_en": "Whether you look up or down, you see only yourself.",
+    "price_zh": "仅作展示",
+    "price_en": "Exhibition Only",
+    "status": "exhibition",
+    "img": "du_zhongsheng_b.jpg",
+    "images": [
+      "du_zhongsheng_b.jpg",
+      "du_zhongsheng_1.jpg",
+      "du_zhongsheng_real_1.jpg",
+      "du_zhongsheng_real_2.jpg",
+      "du_zhongsheng_real_3.jpg",
+      "du_zhongsheng_real_4.jpg",
+      "du_zhongsheng_real_5.jpg"
+    ]
+  },
+  {
+    "id": "sm_1",
+    "title_zh": "生命记忆*1（泥稿）",
+    "title_en": "Life Memory No.1 (Clay)",
+    "series_zh": "生命记忆",
+    "series_en": "Life Memory",
+    "year": "2025",
+    "material_zh": "泥稿",
+    "material_en": "Clay Model",
+    "size": "35×18×62 cm",
+    "quote_zh": "生长是生命对自身的渴望，随他去吧！",
+    "quote_en": "Growth is life's longing for itself — let it go.",
+    "price_zh": "仅作展示（泥稿）",
+    "price_en": "Exhibition Only (Clay)",
+    "status": "exhibition",
+    "img": "smji_1.jpg",
+    "images": [
+      "smji_1.jpg",
+      "smji_1_mud_photo_1.jpg",
+      "smji_1_mud_photo_2.jpg",
+      "smji_1_mud_photo_3.jpg"
+    ]
+  },
+  {
+    "id": "sm_2",
+    "title_zh": "生命记忆*2（泥稿）",
+    "title_en": "Life Memory No.2 (Clay)",
+    "series_zh": "生命记忆",
+    "series_en": "Life Memory",
+    "year": "2025",
+    "material_zh": "泥稿",
+    "material_en": "Clay Model",
+    "size": "67×21×26 cm",
+    "quote_zh": "别害怕，记忆的拥抱可以很温暖",
+    "quote_en": "Don't be afraid — the embrace of memory can be very warm.",
+    "price_zh": "仅作展示（泥稿）",
+    "price_en": "Exhibition Only (Clay)",
+    "status": "exhibition",
+    "img": "smji_2_mud.jpg",
+    "images": [
+      "smji_2_mud.jpg",
+      "smji_2_mud_photo_1.jpg",
+      "smji_2_mud_photo_2.jpg"
+    ]
+  },
+  {
+    "id": "sm_3",
+    "title_zh": "生命记忆*2（非洲柚木）",
+    "title_en": "Life Memory No.2 (African Teak)",
+    "series_zh": "生命记忆",
+    "series_en": "Life Memory",
+    "year": "2025",
+    "material_zh": "非洲柚木",
+    "material_en": "African Teak",
+    "size": "85×33×27 cm",
+    "quote_zh": "别害怕，记忆的拥抱可以很温暖",
+    "quote_en": "Don't be afraid — the embrace of memory can be very warm.",
+    "price_zh": "¥28,000 / 版 ｜ 限量9版",
+    "price_en": "¥28,000 / Edition ｜ Limited 9 Editions",
+    "status": "available",
+    "img": "smji_2_wood_b.jpg",
+    "images": [
+      "smji_2_wood_b.jpg",
+      "smji_2_wood_photo_1.jpg",
+      "smji_2_wood_photo_2.jpg",
+      "smji_2_wood_photo_3.jpg",
+      "smji_2_wood_photo_4.jpg",
+      "smji_2_wood_photo_5.jpg",
+      "smji_2_wood_photo_6.jpg",
+      "smji_2_wood_photo_7.jpg"
+    ]
+  },
+  {
+    "id": "sm_4",
+    "title_zh": "生命记忆*3（数据完成）",
+    "title_en": "Life Memory No.3 (Data Complete)",
+    "series_zh": "生命记忆",
+    "series_en": "Life Memory",
+    "year": "2025",
+    "material_zh": "待定（数据保存）",
+    "material_en": "TBD (Data Preserved)",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "smji_sketch1.jpg",
+    "images": [
+      "smji_sketch1.jpg",
+      "smji_sketch1_1.jpg",
+      "smji_sketch1_2.jpg"
+    ],
+    "custom_note_zh": "作品完成，数据保存。可接受定制铸造",
+    "custom_note_en": "Work complete, data preserved. Custom casting available."
+  },
+  {
+    "id": "sm_5",
+    "title_zh": "生命记忆*4（数据完成）",
+    "title_en": "Life Memory No.4 (Data Complete)",
+    "series_zh": "生命记忆",
+    "series_en": "Life Memory",
+    "year": "2025",
+    "material_zh": "待定（数据保存）",
+    "material_en": "TBD (Data Preserved)",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "smji_sketch2.jpg",
+    "images": [
+      "smji_sketch2.jpg",
+      "smji_sketch2_1.jpg",
+      "smji_sketch2_2.jpg"
+    ],
+    "custom_note_zh": "作品完成，数据保存。可接受定制铸造",
+    "custom_note_en": "Work complete, data preserved. Custom casting available."
+  },
+  {
+    "id": "gw_1",
+    "title_zh": "格物·形体研究（一）",
+    "title_en": "Investigation of Things — Form Study I",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2023–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "从物质到生命；本与末的转化，体会客观存在含有的内在规律",
+    "quote_en": "From matter to life — transforming root and branch, feeling the inner laws of objective existence.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_1.jpg",
+    "images": [
+      "gw_1.jpg",
+      "gw_1_1.jpg",
+      "gw_1_2.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_2",
+    "title_zh": "格物·形体研究（二）",
+    "title_en": "Investigation of Things — Form Study II",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2023–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "生命力似乎不依赖任何物质与生命而存在，而是宇宙的一股力量",
+    "quote_en": "Vitality seems independent of matter and life — a force of the cosmos.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_2.jpg",
+    "images": [
+      "gw_2.jpg",
+      "gw_2_1.jpg",
+      "gw_2_2.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_3",
+    "title_zh": "格物·形体研究（三）",
+    "title_en": "Investigation of Things — Form Study III",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2024–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "唤醒自我，唤醒生命",
+    "quote_en": "Awaken the self; awaken life.",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_3.jpg",
+    "images": [
+      "gw_3.jpg",
+      "gw_3_1.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_4",
+    "title_zh": "格物·形体研究（四）",
+    "title_en": "Investigation of Things — Form Study IV",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2024–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_4.jpg",
+    "images": [
+      "gw_4.jpg",
+      "gw_4_1.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_5",
+    "title_zh": "格物·形体研究（五）",
+    "title_en": "Investigation of Things — Form Study V",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2024–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_5.jpg",
+    "images": [
+      "gw_5.jpg",
+      "gw_5_1.jpg",
+      "gw_5_2.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_6",
+    "title_zh": "格物·形体研究（六）",
+    "title_en": "Investigation of Things — Form Study VI",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2024–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_6.jpg",
+    "images": [
+      "gw_6.jpg",
+      "gw_6_1.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "gw_7",
+    "title_zh": "格物·形体研究（七）",
+    "title_en": "Investigation of Things — Form Study VII",
+    "series_zh": "格物·形体研究",
+    "series_en": "Investigation of Things",
+    "year": "2024–",
+    "material_zh": "泥稿 / 可定制铸铜",
+    "material_en": "Clay Model / Custom Bronze Available",
+    "size": "待定",
+    "quote_zh": "",
+    "quote_en": "",
+    "price_zh": "可接受定制，详询工作室",
+    "price_en": "Custom Order Available — Inquire",
+    "status": "custom",
+    "img": "gw_7.jpg",
+    "images": [
+      "gw_7.jpg",
+      "gw_7_1.jpg",
+      "gw_7_2.jpg"
+    ],
+    "custom_note_zh": "数据已完成，可接受定制铸造",
+    "custom_note_en": "Data complete. Custom casting available."
+  },
+  {
+    "id": "paint_1",
+    "title_zh": "无意识绘画试验1（点线面）",
+    "title_en": "Unconscious Painting Experiment No.1 (Point, Line, Plane)",
+    "series_zh": "思想试验·无意识绘画试验",
+    "series_en": "Thought Experiment: Unconscious Painting Experiment",
+    "year": "2026–",
+    "material_zh": "纸本绘画",
+    "material_en": "Paper Drawing",
+    "size": "待定",
+    "quote_zh": "有意识不干涉绘画，希望逐渐达到无意识。线条有生命力，图有张力。",
+    "quote_en": "Consciously not interfering — aiming for unconscious creation. Lines carry vitality; images carry tension.",
+    "price_zh": "详询工作室",
+    "price_en": "Inquire at Studio",
+    "status": "exhibition",
+    "img": "huihua_1.jpg",
+    "images": [
+      "huihua_1.jpg",
+      "huihua_1_1.jpg"
+    ]
+  },
+  {
+    "id": "paint_2",
+    "title_zh": "无意识绘画试验2（点线面）",
+    "title_en": "Unconscious Painting Experiment No.2 (Point, Line, Plane)",
+    "series_zh": "思想试验·无意识绘画试验",
+    "series_en": "Thought Experiment: Unconscious Painting Experiment",
+    "year": "2026–",
+    "material_zh": "纸本绘画",
+    "material_en": "Paper Drawing",
+    "size": "待定",
+    "quote_zh": "让潜意识唤醒生命自身的力量",
+    "quote_en": "Let the subconscious awaken life's own power.",
+    "price_zh": "详询工作室",
+    "price_en": "Inquire at Studio",
+    "status": "exhibition",
+    "img": "huihua_2.jpg",
+    "images": [
+      "huihua_2.jpg",
+      "huihua_2_1.jpg"
+    ]
+  },
+  {
+    "id": "paint_3",
+    "title_zh": "无意识绘画试验3（点线面）",
+    "title_en": "Unconscious Painting Experiment No.3 (Point, Line, Plane)",
+    "series_zh": "思想试验·无意识绘画试验",
+    "series_en": "Thought Experiment: Unconscious Painting Experiment",
+    "year": "2026–",
+    "material_zh": "纸本绘画",
+    "material_en": "Paper Drawing",
+    "size": "待定",
+    "quote_zh": "线条有生命力，图有张力。还会持续试验，用不同的工具和方式。",
+    "quote_en": "Lines carry vitality; images carry tension. Experiments continue with different tools and approaches.",
+    "price_zh": "详询工作室",
+    "price_en": "Inquire at Studio",
+    "status": "exhibition",
+    "img": "huihua_3.jpg",
+    "images": [
+      "huihua_3.jpg",
+      "huihua_3_1.jpg"
+    ]
+  },
+  {
+    "id": "paint_4",
+    "title_zh": "无意识绘画试验4（点线面）",
+    "title_en": "Unconscious Painting Experiment No.4 (Point, Line, Plane)",
+    "series_zh": "思想试验·无意识绘画试验",
+    "series_en": "Thought Experiment: Unconscious Painting Experiment",
+    "year": "2026–",
+    "material_zh": "纸本绘画",
+    "material_en": "Paper Drawing",
+    "size": "待定",
+    "quote_zh": "持续试验，用不同的工具和方式，让潜意识自由表达。",
+    "quote_en": "Continuous experimentation with different tools and approaches, letting the subconscious express freely.",
+    "price_zh": "仅展示",
+    "price_en": "Exhibition Only",
+    "status": "exhibition",
+    "img": "huihua_4_1.jpg",
+    "images": [
+      "huihua_4_1.jpg",
+      "huihua_4.jpg"
+    ]
+  }
+];;
+
+// ============================================================
+// Language System
+// ============================================================
+let lang = 'zh';
+const IMG_DIR = 'images';
+const currentLang = lang;
+
+function toggleLang() {
+  lang = lang === 'zh' ? 'en' : 'zh';
+  currentLang = lang;
+  document.querySelector('.lang-toggle').textContent = lang === 'zh' ? 'EN' : '中';
+  applyLang();
+  renderWorks();
+  renderLightboxInfo();
+}
+
+function applyLang() {
+  const els = document.querySelectorAll('[data-zh]');
+  els.forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) {
+      if (el.innerHTML !== val && (val.includes('<') || el.tagName !== 'INPUT')) {
+        el.innerHTML = val;
+      }
+    }
+  });
+  document.querySelectorAll('.lang-zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.lang-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+}
+
+// ============================================================
+// Status and Series Filters
+// ============================================================
+let currentStatus = 'all';
+let currentSeries = 'all';
+
+function filterStatus(status) {
+  currentStatus = status;
+  document.querySelectorAll('#statusFilter .filter-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = '';
+    b.style.color = '';
+    b.style.borderColor = '';
+  });
+  const activeBtn = document.querySelector(`#statusFilter [data-status="${status}"]`);
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+    if (status === 'available') { activeBtn.style.background = 'var(--tag-available)'; activeBtn.style.color = '#1a1310'; activeBtn.style.borderColor = 'var(--tag-available)'; }
+    else if (status === 'custom') { activeBtn.style.background = 'var(--tag-custom)'; activeBtn.style.color = '#fff'; activeBtn.style.borderColor = 'var(--tag-custom)'; }
+    else if (status === 'exhibition') { activeBtn.style.background = 'var(--tag-exhibition)'; activeBtn.style.color = '#fff'; activeBtn.style.borderColor = 'var(--tag-exhibition)'; }
+    else { activeBtn.style.background = 'var(--gold)'; activeBtn.style.color = 'var(--bg)'; activeBtn.style.borderColor = 'var(--gold)'; }
+  }
+  renderWorks();
+}
+
+function filterSeries(series) {
+  currentSeries = series;
+  document.querySelectorAll('#seriesFilter .filter-btn').forEach(b => b.classList.remove('active-series'));
+  const activeBtn = document.querySelector(`#seriesFilter [data-series="${series}"]`);
+  if (activeBtn) activeBtn.classList.add('active-series');
+  renderWorks();
+}
+
+function initSeriesFilters() {
+  const series = ['all', ...new Set(works.map(w => w.series_zh))];
+  const container = document.getElementById('seriesFilter');
+  container.innerHTML = '';
+  series.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (s === 'all' ? ' active-series' : '');
+    btn.setAttribute('data-series', s);
+    btn.onclick = () => filterSeries(s);
+    btn.textContent = s === 'all' ? (lang === 'zh' ? '所有系列' : 'All Series') : s;
+    container.appendChild(btn);
+  });
+  // Style active-series
+  document.querySelectorAll('.active-series').forEach(b => {
+    b.style.background = 'var(--gold)'; b.style.color = 'var(--bg)'; b.style.borderColor = 'var(--gold)';
+  });
+}
+
+// ============================================================
+// Render Works Grid
+// ============================================================
+function renderWorks() {
+  const grid = document.getElementById('worksGrid');
+  const filtered = works.filter(w => {
+    const statusOk = currentStatus === 'all' || w.status === currentStatus;
+    const seriesOk = currentSeries === 'all' || w.series_zh === currentSeries;
+    return statusOk && seriesOk;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="works-empty">${lang === 'zh' ? '暂无符合条件的作品' : 'No works found'}</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((w, idx) => {
+    const title = lang === 'zh' ? w.title_zh : w.title_en;
+    const series = lang === 'zh' ? w.series_zh : w.series_en;
+    const price = lang === 'zh' ? w.price_zh : w.price_en;
+    const badgeClass = w.status === 'available' ? 'badge-available' : w.status === 'custom' ? 'badge-custom' : 'badge-exhibition';
+    const badgeText = w.status === 'available' ? (lang === 'zh' ? '可收藏' : 'Available') :
+                      w.status === 'custom' ? (lang === 'zh' ? '可定制' : 'Custom') :
+                      (lang === 'zh' ? '仅展示' : 'Exhibition');
+    const originalIdx = works.indexOf(w);
+    return `
+      <div class="work-card reveal" onclick="openLightbox(${originalIdx})">
+        <span class="work-card-badge ${badgeClass}">${badgeText}</span>
+        <img class="work-card-img" src="images/${w.img}" alt="${title}" loading="lazy" onerror="this.style.background='var(--bg3)';this.style.height='200px'">
+        <div class="work-card-body">
+          <div class="work-card-series">${series}</div>
+          <div class="work-card-title">${title}</div>
+          <div class="work-card-meta">${w.year} · ${w.size}</div>
+          <div class="work-card-price">${price}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  observeReveal();
+}
+
+// ============================================================
+// Lightbox
+// ============================================================
+let lbIdx = 0;
+let lbFiltered = [];
+
+function openLightbox(idx) {
+  const w = works[idx];
+  const lang = currentLang;
+  const lb = document.getElementById('lightbox');
+  const title = w['title_' + lang] || w.title_zh;
+  const series = w['series_' + lang] || w.series_zh;
+  const material = w['material_' + lang] || w.material_zh;
+  const size = w.size;
+  const price = w['price_' + lang] || w.price_zh;
+  const quote = w['quote_' + lang] || w.quote_zh;
+  const customNote = w['custom_note_' + lang] || w.custom_note_zh || '';
+  const allImgs = w.images || [w.img];
+  
+  let imgHTML = '';
+  allImgs.forEach((img, i) => {
+    const cls = i === 0 ? 'lb-main-img active' : 'lb-main-img';
+    imgHTML += '<img class="' + cls + '" src="' + IMG_DIR + '/' + img + '" alt="' + title + '" loading="lazy">';
+  });
+  
+  let thumbsHTML = '';
+  if (allImgs.length > 1) {
+    thumbsHTML = '<div class="lb-thumbs">';
+    allImgs.forEach((img, i) => {
+      const cls = i === 0 ? 'lb-thumb active' : 'lb-thumb';
+      thumbsHTML += '<img class="' + cls + '" src="' + IMG_DIR + '/' + img + '" alt="" onclick="switchLBImg(' + i + ')" loading="lazy">';
+    });
+    thumbsHTML += '</div>';
+  }
+
+  let statusHTML = '';
+  if (w.status === 'custom') {
+    statusHTML = '<span class="work-tag tag-custom">' + (lang === 'zh' ? '可定制' : 'Custom') + '</span>';
+    if (customNote) {
+      statusHTML += '<p style="color:#6b9f7e;font-size:0.75rem;margin-top:6px;">' + customNote + '</p>';
+    }
+  } else if (w.status === 'exhibition') {
+    statusHTML = '<span class="work-tag tag-exhibition">' + (lang === 'zh' ? '仅展示' : 'Exhibition Only') + '</span>';
+  }
+
+  const quoteHTML = quote ? '<p class="lb-quote">"' + quote + '"</p>' : '';
+  const lPrice = lang === 'zh' ? '收藏价' : 'Price';
+  const lMaterial = lang === 'zh' ? '材质' : 'Material';
+  const lSize = lang === 'zh' ? '尺寸' : 'Size';
+  const lYear = lang === 'zh' ? '年份' : 'Year';
+
+  lb.querySelector('.lb-images').innerHTML = imgHTML;
+  lb.querySelector('.lb-thumbs-wrap').innerHTML = thumbsHTML;
+  lb.querySelector('.lb-info').innerHTML = 
+    '<h3 class="lb-title">' + title + '</h3>' +
+    '<div class="lb-meta"><span>' + series + ' · ' + w.year + '</span></div>' +
+    statusHTML +
+    '<div class="lb-details">' +
+      '<div class="lb-detail-row"><span class="lb-detail-label">' + lMaterial + '</span><span>' + material + '</span></div>' +
+      '<div class="lb-detail-row"><span class="lb-detail-label">' + lSize + '</span><span>' + size + '</span></div>' +
+      (w['size_note_' + lang] ? '<div style="font-size:0.72rem;color:var(--text3);margin-top:2px;line-height:1.5;">' + w['size_note_' + lang] + '</div>' : '') +
+    '</div>' +
+    quoteHTML +
+    '<div class="lb-price">' +
+      '<div class="lb-price-label">' + lPrice + '</div>' +
+      '<div class="lb-price-val">' + price + '</div>' +
+      '<div style="font-size:0.68rem;color:var(--text3);margin-top:5px;line-height:1.6;">' +
+        (lang === 'zh' ? '\u203b \u88f8\u4ef7\uff0c\u4e0d\u542b\u7a0e\u8d39\u53ca\u8fd0\u8d39\uff08\u542b\u56fd\u9645\u7269\u6d41\uff09\u3002\u8be6\u8be2\u5de5\u4f5c\u5ba4\u3002' : '\u203b Artwork price only. Taxes, duties & shipping (incl. international) are not included.') +
+      '</div>' +
+    '</div>';
+  lb.classList.add('open');
+  lbImgIdx = 0;
+  document.body.style.overflow = 'hidden';
+  // 手机端：有多张图时显示滑动提示
+  const swipeHint = document.getElementById('lbSwipeHint');
+  if (swipeHint) {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile && allImgs.length > 1) {
+      swipeHint.classList.remove('active');
+      void swipeHint.offsetWidth; // 重置动画
+      swipeHint.classList.add('active');
+      // 动画结束后隐藏
+      setTimeout(() => swipeHint.classList.remove('active'), 3200);
+    } else {
+      swipeHint.classList.remove('active');
+    }
+  }
+}
+
+function switchLBImg(idx) {
+  const imgs = document.querySelectorAll('.lb-main-img');
+  const thumbs = document.querySelectorAll('.lb-thumb');
+  imgs.forEach((img, i) => { img.classList.toggle('active', i === idx); });
+  thumbs.forEach((t, i) => { t.classList.toggle('active', i === idx); });
+  lbImgIdx = idx;
+}
+
+// ---- Lightbox touch swipe (mobile) ----
+let lbTouchStartX = 0;
+let lbTouchStartY = 0;
+function initLBTouch() {
+  const imgArea = document.querySelector('.lb-img-area');
+  if (!imgArea) return;
+  imgArea.addEventListener('touchstart', e => {
+    lbTouchStartX = e.touches[0].clientX;
+    lbTouchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  imgArea.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbTouchStartX;
+    const dy = e.changedTouches[0].clientY - lbTouchStartY;
+    if (Math.abs(dx) < 30 || Math.abs(dy) > Math.abs(dx)) return; // 忽略细微滑动或竖向滑动
+    const imgs = document.querySelectorAll('.lb-main-img');
+    const total = imgs.length;
+    if (total <= 1) return;
+    if (dx < 0) {
+      switchLBImg((lbImgIdx + 1) % total); // 向左滑 → 下一张
+    } else {
+      switchLBImg((lbImgIdx - 1 + total) % total); // 向右滑 → 上一张
+    }
+  }, { passive: true });
+}
+document.addEventListener('DOMContentLoaded', initLBTouch);
+
+function updateLightbox() {
+  const w = works[lbIdx];
+  if (!w) return;
+  document.getElementById('lbImg').src = 'images/' + w.img;
+  renderLightboxInfo();
+  // Thumbs: only show if series has multiple works
+  const seriesWorks = works.filter(sw => sw.series_zh === w.series_zh);
+  const thumbsEl = document.getElementById('lbThumbs');
+  if (seriesWorks.length > 1) {
+    thumbsEl.style.display = 'flex';
+    thumbsEl.innerHTML = seriesWorks.map(sw => {
+      const isActive = sw.id === w.id;
+      const swIdx = works.indexOf(sw);
+      return `<img class="lb-thumb ${isActive ? 'active' : ''}" src="images/${sw.img}" onclick="openLightbox(${swIdx})" loading="lazy">`;
+    }).join('');
+  } else {
+    thumbsEl.style.display = 'none';
+  }
+  const series = lang === 'zh' ? w.series_zh : w.series_en;
+  document.getElementById('lbSeries').textContent = series;
+}
+
+function renderLightboxInfo() {
+  const w = works[lbIdx];
+  if (!w) return;
+  const title = lang === 'zh' ? w.title_zh : w.title_en;
+  const titleEn = w.title_en;
+  const material = lang === 'zh' ? w.material_zh : w.material_en;
+  const price = lang === 'zh' ? w.price_zh : w.price_en;
+  const quote = lang === 'zh' ? w.quote_zh : w.quote_en;
+  const customNote = lang === 'zh' ? (w.custom_note_zh || '') : (w.custom_note_en || '');
+  const lYear = lang === 'zh' ? '创作年份' : 'Year';
+  const lMat = lang === 'zh' ? '材质' : 'Material';
+  const lSize = lang === 'zh' ? '尺寸' : 'Size';
+  const lPrice = lang === 'zh' ? '收藏价格' : 'Price';
+
+  document.getElementById('lbInfo').innerHTML = `
+    <div class="lb-title">${title}</div>
+    ${lang === 'zh' ? `<div class="lb-title-en">${titleEn}</div>` : ''}
+    <div class="lb-detail-row">
+      <div class="lb-detail-label">${lYear}</div>
+      <div class="lb-detail-val">${w.year}</div>
+    </div>
+    <div class="lb-detail-row">
+      <div class="lb-detail-label">${lMat}</div>
+      <div class="lb-detail-val">${material}</div>
+    </div>
+    <div class="lb-detail-row">
+      <div class="lb-detail-label">${lSize}</div>
+      <div class="lb-detail-val">${w.size}</div>
+    </div>
+    <div class="lb-price">
+      <div class="lb-price-label">${lPrice}</div>
+      <div class="lb-price-val">${price}</div>
+      <div style="font-size:0.68rem;color:var(--text3);margin-top:5px;line-height:1.6;">
+        ${lang === 'zh' ? '※ 裸价，不含税费及运费（含国际物流）。详询工作室。' : '※ Artwork price only. Taxes, duties & shipping (incl. international) are not included.'}
+      </div>
+    </div>
+    ${customNote ? `<div class="lb-custom-note">${customNote}</div>` : ''}
+    ${quote ? `<div class="lb-quote">"${quote}"</div>` : ''}
+  `;
+}
+
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + works.length) % works.length;
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// ============================================================
+// Scroll Reveal
+// ============================================================
+function observeReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}
+
+// ============================================================
+// Mobile Menu
+// ============================================================
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ============================================================
+// Init
+// ============================================================
+window.addEventListener('load', () => {
+  document.getElementById('loader').classList.add('hidden');
+  initSeriesFilters();
+  renderWorks();
+  observeReveal();
+  applyLang();
+});
+
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  navbar.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.5)' : 'none';
+});
+</script>
+</body>
+</html>
